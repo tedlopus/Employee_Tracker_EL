@@ -1,5 +1,6 @@
 const express = require('express');
 const mysql = require('mysql2');
+const cTable = require('console.table');
 
 //Set PORT variable and call express so we use it
 const PORT = process.env.PORT || 3001;
