@@ -30,6 +30,7 @@
     "http-errors": "^1.8.1",
     "iconv-lite": "^0.4.24",
     "inherits": "^2.0.4",
+    "inquirer": "^8.2.1",
     "ipaddr.js": "^1.9.1",
     "media-typer": "^0.3.0",
     "merge-descriptors": "^1.0.1",
