@@ -76,6 +76,43 @@ function viewAllEmployees() {
       prompts();
     });
   };
+
+function addEmployee() {
+    inquirer.prompt([
+      {
+        type: "input",
+        name: "firstName",
+        message: "Please enter the employee's first name."
+      },
+      {
+        type: "input",
+        name: "lastName",
+        message: "Please enter the employee's last name."
+      },
+      {
+        type: "list",
+        name: "role",
+        message: "Please select the employee's role.",
+        choices: [
+        "Sales Lead",
+        "Salesperson",
+        "Lead Engineer",
+        "Software Engineer",
+        "Account Manager",
+        "Accountant",
+        "Legal Team Lead",
+        "Lawyer"]
+      },
+      {
+        type: "input",
+        name: "manager",
+        message: "Please select the employee's manager.",
+        choices
+      }
+
+    
+    ])
+}
   
   app.listen(PORT);
   
