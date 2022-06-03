@@ -139,17 +139,9 @@ const addEmployee = () => {
         "Scott Mescudi",
       ],
     },
-  ]);
-};
-
-const addDepartment = () => {
-  return inquirer.prompt({
-    type: "input",
-    name: "departmentName",
-    message: "What is the name of the department?",
-  }).then((response) => {
-    const sql = 'INSERT INTO department (department_name) VALUES (department_name)';
-    db.query(sql, (err, res) => {
+  ]).then((response) => {
+    const sql = 'INSERT INTO employee (employee_name) VALUES (id)';
+    db.query(sql, response, (err, res) => {
       if (err) throw err;
       console.table(res);
       prompts();
@@ -157,7 +149,47 @@ const addDepartment = () => {
   });
 };
 
-const addRole = () => {};
+const addDepartment = () => {
+  return inquirer.prompt([{
+    type: "input",
+    name: "departmentName",
+    message: "What is the name of the department?",
+  },
+]).then((response) => {
+    const sql = 'INSERT INTO department (department_name) VALUES (id)';
+    db.query(sql, response, (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      prompts();
+    });
+  });
+};
+
+const addRole = () => {
+  return inquirer.prompt([{ 
+    type: "input",
+    name: "roleName",
+    message: "What is the name of the role?",
+  },
+  { 
+    type: "input",
+    name: "salary",
+    message: "What is the salary of the role?",
+  },
+  { 
+    type: "input",
+    name: "departmentName",
+    message: "Which department does the role belong to?",
+  },
+]).then((response) => {
+    const sql = 'INSERT INTO roles (title) VALUES (id)';
+    db.query(sql, response, (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      prompts();
+    });
+  });
+};
 
 app.listen(PORT);
 
