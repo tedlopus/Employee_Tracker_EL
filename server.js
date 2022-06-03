@@ -14,7 +14,7 @@ const db = mysql.createConnection(
   {
     host: "localhost",
     user: "root",
-    password: "",
+    password: "eggmanwalrus1@3",
     database: "tracker_db",
   },
   console.log(`Connected to the tracker_db database.`)
@@ -70,6 +70,24 @@ const prompts = () => {
 // View all employees in the employee tracker database
 function viewAllEmployees() {
     const sql = `SELECT employee.id, employee.first_name, employee.last_name, roles.title, roles.salary, department.department_name AS department, CONCAT(man.first_name, " ", man.last_name) AS manager FROM employee INNER JOIN roles ON roles.id = employee.role_id INNER JOIN department ON department.id = roles.department_id LEFT JOIN employee man ON employee.manager_id = man.id;`;
+    db.query(sql, (err, res) => {
+      if (err)  throw err;
+      console.table(res);
+      prompts();
+    });
+  };
+
+  function viewAllDepartments() {
+    const sql = `SELECT department.id, department.department_name FROM department;`;
+    db.query(sql, (err, res) => {
+      if (err)  throw err;
+      console.table(res);
+      prompts();
+    });
+  };
+
+  function viewAllRoles() {
+    const sql = `SELECT roles.id, roles.title, roles.salary, roles.department_id FROM roles;`;
     db.query(sql, (err, res) => {
       if (err)  throw err;
       console.table(res);
