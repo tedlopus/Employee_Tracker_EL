@@ -1,6 +1,7 @@
 const express = require("express");
 const mysql = require("mysql2");
 const inquirer = require("inquirer");
+const cTable = require('console.table');
 const { response } = require("express");
 
 //Set PORT variable and call express so we use it
@@ -101,17 +102,17 @@ const addEmployee = () => {
   inquirer.prompt([
     {
       type: "input",
-      name: "firstName",
+      name: "first_name",
       message: "What is the employee's first name?",
     },
     {
       type: "input",
-      name: "lastName",
+      name: "last_name",
       message: "What is the employee's last name?",
     },
     {
       type: "list",
-      name: "role",
+      name: "role_id",
       message: "What is the employee's role?",
       choices: [
         "Sales Lead",
@@ -125,8 +126,8 @@ const addEmployee = () => {
       ],
     },
     {
-      type: "input",
-      name: "manager",
+      type: "list",
+      name: "manager_id",
       message: "Who is the employee's manager?",
       choices: [
         "John Doe",
@@ -140,7 +141,7 @@ const addEmployee = () => {
       ],
     },
   ]).then((response) => {
-    const sql = 'INSERT INTO employee (employee_name) VALUES (id)';
+    const sql = 'INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (employee)';
     db.query(sql, response, (err, res) => {
       if (err) throw err;
       console.table(res);
@@ -168,7 +169,7 @@ const addDepartment = () => {
 const addRole = () => {
   return inquirer.prompt([{ 
     type: "input",
-    name: "roleName",
+    name: "title",
     message: "What is the name of the role?",
   },
   { 
@@ -177,12 +178,18 @@ const addRole = () => {
     message: "What is the salary of the role?",
   },
   { 
-    type: "input",
-    name: "departmentName",
+    type: "list",
+    name: "department_id",
     message: "Which department does the role belong to?",
+    choices: [
+      "Engineering",
+      "Finance",
+      "Legal",
+      "Sales",
+    ],
   },
 ]).then((response) => {
-    const sql = 'INSERT INTO roles (title) VALUES (id)';
+    const sql = 'INSERT INTO roles (title, salary, department_id) VALUES (id)';
     db.query(sql, response, (err, res) => {
       if (err) throw err;
       console.table(res);
