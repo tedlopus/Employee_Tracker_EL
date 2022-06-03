@@ -145,15 +145,15 @@ const addEmployee = () => {
 const addDepartment = () => {
   return inquirer.prompt({
     type: "input",
-    name: "department_name",
+    name: "departmentName",
     message: "What is the name of the department?",
   }).then((response) => {
-    const sql = 'INSERT INTO department (department_name) VALUES (?)';
-    db.query(sql, response.name, (err, res) => {
+    const sql = 'INSERT INTO department (department_name) VALUES (department_name)';
+    db.query(sql, (err, res) => {
       if (err) throw err;
       console.table(res);
+      prompts();
     });
-    prompts();
   });
 };
 
